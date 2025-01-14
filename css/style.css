@@ -1,0 +1,127 @@
+body {
+    background-color: #ffffff;
+    padding: 40px 40px 40px 40px;
+}
+
+.wrapper {
+    background-color: #ffffff;
+}
+
+/* Main Content */
+.main-content {
+    padding-left: 200px;
+    padding-top: 80px;
+    padding-right: 200px;
+    padding-bottom: 80px;
+    max-width: 1000px;
+    
+}
+
+/* Title h1 */
+.h1 {
+    color: #123752;
+    font-size: 42px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    line-height: 1.35;
+    text-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    font-style: inherit;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+/* Title h2 */
+.h2 {
+    color: #123752;
+    font-size: 36px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-style: inherit;
+    box-sizing: border-box;
+}
+/* Title h3 */
+.h3 {
+    color: #4c4d4a;
+    font-size: 26px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    line-height: 1.35em;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-style: inherit;
+    box-sizing: border-box;
+}
+/* Paragraph */
+.p {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.75em;
+    color: #4C4D4A;
+    margin-top: 20px;
+    margin-bottom: 1.5em;
+    word-wrap: break-word;
+    box-sizing: border-box;
+}
+/* List */
+.li {
+
+    line-height: 1.75;
+}
+.li-item {
+    color: #4c4d4a;
+    font-size: 14px;
+    font-family: 'Inter-normal', sans-serif;
+    font-weight: 400;
+    line-height: 1.75;
+}
+
+.pre {
+    margin: 0;
+    padding: 0;
+    white-space: pre-wrap;
+}
+
+/* Two images */
+.image-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 45%;
+    height: auto;
+    margin-right: 90px;
+}
+
+code {
+  color: red;
+  font-family: monospace;
+}
+
+img {
+max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .image-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}

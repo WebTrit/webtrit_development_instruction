@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebTrit Demo</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <style>
+        @media only screen and (max-width: 768px) {
+            .wrapper {
+                padding: 10px;
+            }
+
+            .main-content {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            h2,
+            h3 {
+                font-size: 1.2em;
+            }
+
+            .Paragraph {
+                font-size: 1em;
+            }
+
+            .image-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .image {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .pre {
+                font-size: 0.9em;
+                word-wrap: break-word;
+            }
+        }
+
+        @media only screen and (max-width: 480px) {
+            h1 {
+                font-size: 1.3em;
+            }
+
+            h2,
+            h3 {
+                font-size: 1em;
+            }
+
+            .Paragraph {
+                font-size: 0.9em;
+            }
+
+            .pre {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+    <script src="scripts/main.js"></script>
+</head>
+
+<body>
+<!-- Wrapper -->
+<div class="wrapper">
+    <!-- Main content -->
+    <div class="main-content">
+        <h1 class="h1">How to connect to WebTrit demo environment to jump-start the development of your WebRTC voice or
+            video chat application</h1>
+        <h2 class="h2">Sign up for WebTrit demo account</h2>
+        <p class="Paragraph">Please create a free account via <a href="https://signup.webtrit.com/"
+                                                                 target="_blank">https://signup.webtrit.com/</a>.
+        </p>
+        <p class="Paragraph">Once you have logged into the WebTrit self-care portal, you will see the button “Send me
+            the
+            developer’s credentials” - click on it and the parameters for accessing WebTrit back-end from your
+            application
+            (such as the URL of the API server, tenant_id, your username + password, etc.) will be delivered to your
+            email.
+            That email will have the content very similar to the text below, but with the properly populated URL and
+            other
+            parameters, so it makes sense to follow there. 🙂</p>
+        <p class="Paragraph">In the examples in the rest of this document we will use <code>{CORE_HOST}</code>
+            as the API server, but please use the actual API server address provided in the
+            email, since it may change in the future.
+        </p>
+        <h3 class="h3"> What is tenant ID and why do you need it?</h3>
+        <p class="Paragraph"> You will be using our demo system, shared between multiple companies, so in order to
+            separate you from the other customers we create isolated environments, called tenants. You can read more
+            details
+            about this in the “Multitenancy in WebTrit” article. Make sure you add tenant ID into the API URL, so if
+            your
+            tenant ID is ABCD123 and you want to call /session method to login - the URL should look like
+            https://{CORE_HOST}/tenant/ABCD123/session.</p>
+        <H2 class="h2">Verify that your account works</H2>
+        <h3 class="h3">Test using WebDialer</h3>
+        <p class="Paragraph">You can open WebTrit dialer for tests using<a
+                href="https://dialer.demo.webtrit.com/login?tenant=<tenant_id>&email=<email>" target="_blank">
+            https://dialer.demo.webtrit.com/login?tenant=
+            <tenant_id>&email=&lt;email&gt;
+        </a>. The one-time password (OTP)
+            will be sent to your email.
+        </p>
+        <img src="img/one-time%20password.png" alt="WebTrit dialer" class="img">
+        <p class="Paragraph">Once logged in you can call WebTrit contact center</p>
+        <img src="img/WebTrit%20contact%20center.png" alt="WebTrit contact center" class="img">
+        <p class="Paragraph">The great thing about the WebTrit Dialer is that you can use explore <a
+                href="https://bit.ly/WebDialerSourceCode" target="_blank">the source code</a> and monitor the
+            communication
+            between the application and WebTrit back-end, so you can use it as an example for your own application.</p>
+        <img src="img/WebTrit%20contact%20center_2.png" alt="WebTrit contact center" class="img">
+        <p class="Paragraph">Alternatively, you download the WebTrit app for smartphones and test the functionality on
+            the
+            mobile device:</p>
+        <ul>
+            <li class="li-item"><a href="https://bit.ly/WebTritDemoIphone"
+                                   target="_blank">https://bit.ly/WebTritDemoIphone</a></li>
+            <li class="li-item"><a href="https://bit.ly/WebTritDemoAndroid"
+                                   target="_blank">https://bit.ly/WebTritDemoAndroid</a></li>
+        </ul>
+        <h2 class="h2">Authenticate with WebTrit back-end and obtain a session token</h2>
+        <p class="Paragraph">The first thing your application has to do is to establish an authenticated session with
+            WebTrit back-end - this is done by sending an HTTP POST request to the /session endpoint of <a
+                    href="https://bit.ly/WebTritCoreAPI" target="_blank">WebTrit core API</a>. Make sure you insert the
+            appropriate values into tenant_id, username and password. Also, create your own name for your application
+            and
+            use it as the value for the identifier parameter.</p>
+        <pre class="pre">
+      curl -X 'POST' \
+      'https://<span style="color: red;">{CORE_HOST}</span>/tenant/<span style="color: red;">{TENANT_ID}</span>/api/v1/session' \
+      -H 'accept: application/json' \
+      -H 'X-Request-ID: demo-test' \
+      -H 'Content-Type: application/json' \
+      -d '{
+      "bundle_id": "com.webtrit.app",
+      "identifier": "<span style="color: red;">change-and-use-your-own-name</span>",
+      "password": "<span style="color: red;">&lt;password&gt;</span>",
+      "type": "web",
+      "user_ref": "<span style="color: red;">{USERNAME}</span>"
+    }'
+    </pre>
+        <p class="Paragraph">Example:</p>
+        <img src="img/Code%20example_2.png" alt="code example" class="img">
+        <p class="Paragraph">When authentication is successful, you will receive the access token to be used to
+            authenticate further requests to the Core API - as well as requests to Signaling API.</p>
+        <h2 class="h2">Test the core API
+        </h2>
+        <p class="Paragraph">This API is used for communication with WebTrit back-end to display the data about the user
+            and the cloud PBX environment (for instance the list of cloud PBX contacts - other configured extensions in
+            the
+            PBX). To test it, we will send GET requests to /user (basic user information) and /user/contacts (the list
+            of
+            PBX extensions).
+        </p>
+        <p class="Paragraph">When sending your requests, make sure that you replace the value of
+            <tenant_id> with the
+                correct value - and of course you have to use a valid token in the “Authorization” field.
+        </p>
+        <pre class="pre">
+        curl -X 'GET' \
+        'https://<span style="color: red;">{CORE_HOST}</span>/tenant/<span style="color: red;">{TENANT_ID}</span>/api/v1/user' \
+        -H 'accept: application/json' \
+        -H 'Authorization: Bearer <span style="color: red;">&lt;token&gt;</span>'
+      
+        curl -X 'GET' \
+        'https://<span style="color: red;">{CORE_HOST}</span>/tenant/<span style="color: red;">{TENANT_ID}</span>/api/v1/user/contacts' \
+        -H 'accept: application/json' \
+        -H 'Authorization: Bearer <span style="color: red;">&lt;token&gt;</span>'
+      </pre>
+        <img src="img/Code%20example_1.png" alt="code example" class="img">
+        <h2 class="h2">Jump-start your development using the WebTrit dialer</h2>
+        <p class="Paragraph">
+            If you want to develop a web application for WebRTC voice/video calling - you do not have to start from
+            scratch.
+            There is <a href="https://bit.ly/WebDialerSourceCode" target="_blank">WebTrit dialer GitHub project</a> with
+            the
+            source code for a fully working web dialer application - just download it and put the correct server URL
+            <code>{CORE_HOST}</code> as a value for <code>VUE_APP_WEBTRIT_CORE_URL</code> parameter in the
+            <code>.env</code> file. More information about the available parameters and how to start a local copy of the
+            Web
+            Dialer for development is described in the <a
+                href="https://github.com/webTrit/webtrit_dialer?tab=readme-ov-file#webtrit-dialer"
+                target="_blank">README.md</a>.
+        </p>
+        <p class="Paragraph">
+            Additionally, you might encounter an issue with dependency relying on an obsolete version of SSL. This can
+            be
+            resolved by specifying an option when starting the dialer: <i>NODE_OPTIONS=--openssl-legacy-provider</i>.
+        </p>
+        <h2 class="h2">Connect to WebTrit signaling API
+        </h2>
+        <p class="Paragraph"> Using the access token you obtained after the authentication - you can now use the <a
+                href="https://github.com/WebTrit/webtrit_docs/blob/main/signaling/index.md" target="blank">WebTrit
+            Signaling
+            API</a> (WSTP). Note, that just like with the WebTrit Core API you need to insert the
+            <code>{TENANT_ID}/tenant/</code> into the API URL.
+        </p>
+        <p class="Paragraph">WTSP URL structure:
+        </p>
+        <pre class="pre">
+      wss://<span style="color: red;">{CORE_HOST}</span>[:&lt;WebTrit Core port&gt;]/tenant/{TENANT_ID}/signaling/v1?token=&lt;token&gt;&amp;force=&lt;true&gt;
+      </pre>
+        <p class="Paragraph">For instance:
+        </p>
+        <pre class="pre">
+      wss://<span style="color: red;">{CORE_HOST}</span>/tenant/b7b8c725-0342-4b26-ab03-f47d0a69064f/signaling/v1?token=XCP.fzEQZz8Ni_sElW5JWQOW09XNmvG8r5lqZoTOh0N9O_z0lLWdK6Gi-CDsQUo07-yeKu8vzjdDPxKKIhgQJp5Nij-4BQIDn4O-lygCDdWBqmN49kvR70J3e0HgICth7FgttuQ
+      </pre>
+        <img src="img/Code%20example_3.png" alt="code example" class="img">
+        <h2 class="h2">Initiate a phone call</h2>
+        <p class="Paragraph">After the session to <a
+                href="https://github.com/WebTrit/webtrit_docs/blob/main/signaling/index.md" target="_blank">WebTrit
+            Signaling
+            API</a> has been established - let’s make a phone call.</p>
+        <p class="Paragraph">Whom to call? You can always call the12060000033 number - it is a friendly IVR, so the call
+            always will be answered. When you have the basic calling working, you can (either in the app itself or on
+            signup.webtrit.com) invite your friends / colleagues / your alter-ego with a different email address. Every
+            user, registered on the demo server, will be automatically assigned a “virtual” phone number (you may have
+            seen
+            12065551350 in the screenshots above). These numbers look like real ones, but you can only call it within
+            the
+            demo server. This number is visible in the “My Account”, accessible by clicking on the round icon in the
+            upper
+            right corner of the app.
+        </p>
+        <!-- Two images -->
+        <div class="image-container">
+            <img src="img/WebTrit%20screenshot.jpg" alt="WebTrit screenshot">
+            <img src="img/WebTrit%20screenshot_2.jpg" alt="WebTrit screenshot">
+        </div>
+        <h2 class="h2">Logging out</h2>
+        <p class="Paragraph">When you are finished, it is strongly recommended to explicitly close the session - since
+            if
+            you do not do it and just stop your application, the session between WebTrit back-end and cloud PBX still
+            will
+            be active; WebTrit will maintain SIP registration to the VoIP PBX. In the long run this can create a
+            resource
+            overload.
+        </p>
+        <pre class="pre">
+        curl -X 'DELETE' \
+        'https://<span style="color: red;">{CORE_HOST}</span>/tenant/<span style="color: red;">{TENANT_ID}</span>/api/v1/session' \
+        -H 'accept: */*' \
+        -H 'Authorization: Bearer <span style="color: red;">&lt;token&gt;</span>'
+      </pre>
+
+    </div>
+</div>
+</body>
+
+</html>
