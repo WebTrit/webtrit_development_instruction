@@ -34,7 +34,7 @@
                 align-items: center;
             }
 
-            .image {
+            .img {
                 width: 100%;
                 max-width: 400px;
             }
@@ -95,6 +95,10 @@
             That email will have the content very similar to the text below, but with the properly populated URL and
             other
             parameters, so it makes sense to follow there. 🙂</p>
+        <div class="image-container">
+            <img src="images/developer_access_1.png" alt="code example" class="img">
+            <img src="images/developer_access_2.png" alt="code example" class="img">
+        </div>
         <p class="Paragraph">In the examples in the rest of this document we will use <code>{CORE_HOST}</code>
             as the API server, but please use the actual API server address provided in the
             email, since it may change in the future.
@@ -112,24 +116,23 @@
             URL
             should look like
         <pre
-                class="pre">https://<span style="color: red;">{CORE_HOST}</span>/tenant/<span style="color: red;">{TENANT_ID}</span>/session;</pre>
+                class="pre">https://<span style="color: red;">{CORE_HOST}</span>/tenant/<span style="color: red;">{TENANT_ID}</span>/session</pre>
         <H2 class="h2">Verify that your account works</H2>
         <h3 class="h3">Test using WebDialer</h3>
         <p class="Paragraph">You can open WebTrit dialer for tests using<a
-                href="https://dialer.demo.webtrit.com/login?tenant=<tenant_id>&email=<email>" target="_blank">
-            https://dialer.demo.webtrit.com/login?tenant={TENANT_ID}&email={USERNAME}
-        </a>. The one-time password (OTP)
-            will be sent to your email.
+                href="https://dialer.demo.webtrit.com/login?tenant={TENANT_ID}&email={USERNAME}" target="_blank">
+            https://dialer.demo.webtrit.com/login?tenant={TENANT_ID}&email={USERNAME}.
+        </a> A one-time password (OTP) will be sent to your email.
         </p>
-        <img src="img/one-time%20password.png" alt="WebTrit dialer" class="img">
+        <img src="images/one_time_password.png" alt="WebTrit dialer" class="img">
         <p class="Paragraph">Once logged in you can call WebTrit contact center</p>
-        <img src="img/WebTrit%20contact%20center.png" alt="WebTrit contact center" class="img">
+        <img src="images/contact_center_1.png" alt="WebTrit contact center" class="img">
         <p class="Paragraph">The great thing about the WebTrit Dialer is that you can explore <a
                 href="https://bit.ly/WebDialerSourceCode" target="_blank">the source code</a> and monitor the
             communication
             between the application and WebTrit back-end, so you can use it as an example for your own application.
         </p>
-        <img src="img/WebTrit%20contact%20center_2.png" alt="WebTrit contact center" class="img">
+        <img src="images/contact_center_2.png" alt="WebTrit contact center" class="img">
         <p class="Paragraph">Alternatively, you download the WebTrit app for smartphones and test the functionality
             on
             a mobile device:</p>
@@ -168,7 +171,7 @@ curl -X 'POST' \
   "user_ref": "<span style="color: red;">{USERNAME}</span>"
 }'</pre>
         <p class="Paragraph">Example:</p>
-        <img src="img/Code%20example_2.png" alt="code example" class="img">
+        <img src="images/curl_example_1.png" alt="code example" class="img">
         <p class="Paragraph">When authentication is successful, you will receive the access token to be used to
             authenticate further requests to the Core API - as well as requests to Signaling API.</p>
         <h2 class="h2">Test the core API
@@ -194,7 +197,7 @@ curl -X 'GET' \
   'https://<span style="color: red;">{CORE_HOST}</span>/tenant/<span style="color: red;">{TENANT_ID}</span>/api/v1/user/contacts' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer <span style="color: red;">&lt;token&gt;</span>'</pre>
-        <img src="img/Code%20example_1.png" alt="code example" class="img">
+        <img src="images/curl_example_2.png" alt="code example" class="img">
         <h2 class="h2">Jump-start your development using the WebTrit dialer</h2>
         <p class="Paragraph">
             If you want to develop a web application for WebRTC voice/video calling - you do not have to start from
@@ -234,7 +237,7 @@ wss://<span style="color: red;">{CORE_HOST}</span>[:&lt;WebTrit Core port&gt;]/t
         </p>
         <pre class="pre">
 wss://<span style="color: red;">{CORE_HOST}</span>/tenant/<span style="color: red;">{TENANT_ID}</span>/signaling/v1?token=XCP.fzEQZz8Ni_sElW5JWQOW09XNmvG8r5lqZoTOh0N9O_z0lLWdK6Gi-CDsQUo07-yeKu8vzjdDPxKKIhgQJp5Nij-4BQIDn4O-lygCDdWBqmN49kvR70J3e0HgICth7FgttuQ</pre>
-        <img src="img/Code%20example_3.png" alt="code example" class="img">
+        <img src="images/signaling_example.png" alt="code example" class="img">
         <h2 class="h2">Initiate a phone call</h2>
         <p class="Paragraph">After the session to <a
                 href="https://github.com/WebTrit/webtrit_docs/blob/main/signaling/index.md" target="_blank">WebTrit
@@ -257,8 +260,8 @@ wss://<span style="color: red;">{CORE_HOST}</span>/tenant/<span style="color: re
             right corner of the app.
         </p>
         <div class="image-container">
-            <img src="img/WebTrit%20screenshot.jpg" alt="WebTrit screenshot" class="img">
-            <img src="img/WebTrit%20screenshot_2.jpg" alt="WebTrit screenshot" class="img">
+            <img src="images/app_screenshot_1.jpg" alt="WebTrit screenshot" class="img">
+            <img src="images/app_screenshot_2.jpg" alt="WebTrit screenshot" class="img">
         </div>
         <h2 class="h2">Logging out</h2>
         <p class="Paragraph">When you are finished, it is strongly recommended to explicitly close the session -
